@@ -12,8 +12,10 @@ students = [
     {'first_name': 'Маша'},
     {'first_name': 'Петя'},
 ]
-# ???
-
+lst = [a['first_name'] for a in students]
+s = set(lst)
+for b in s:
+    print(f'{b}: {lst.count(b)}')
 
 # Задание 2
 # Дан список учеников, нужно вывести самое часто повторящееся имя
@@ -26,7 +28,10 @@ students = [
     {'first_name': 'Маша'},
     {'first_name': 'Оля'},
 ]
-# ???
+lst = [a['first_name'] for a in students]
+lst1 = [lst.count(a) for a in lst]
+d = {lst1[i]: lst[i] for i in range(len(lst))}
+print(f'Самое частое имя среди учеников: {d[max(lst1)]}')
 
 
 # Задание 3
@@ -51,7 +56,11 @@ school_students = [
         {'first_name': 'Саша'},
     ],
 ]
-# ???
+for j in range(len(school_students)):
+    lst = [a['first_name'] for a in school_students[j]]
+    lst1 = [lst.count(a) for a in lst]
+    d1 = {lst1[i]: lst[i] for i in range(len(lst))}
+    print(f'Самое частое имя в классе {j + 1}: {d1[max(lst1)]}')
 
 
 # Задание 4
@@ -63,7 +72,7 @@ school_students = [
 school = [
     {'class': '2a', 'students': [{'first_name': 'Маша'}, {'first_name': 'Оля'}]},
     {'class': '2б', 'students': [{'first_name': 'Олег'}, {'first_name': 'Миша'}]},
-    {'class': '2б', 'students': [{'first_name': 'Даша'}, {'first_name': 'Олег'}, {'first_name': 'Маша'}]},
+    {'class': '2в', 'students': [{'first_name': 'Даша'}, {'first_name': 'Олег'}, {'first_name': 'Маша'}]},
 ]
 is_male = {
     'Олег': True,
@@ -72,7 +81,20 @@ is_male = {
     'Миша': True,
     'Даша': False,
 }
-# ???
+for i, d in enumerate(school):
+    x = 0
+    y = 0
+    for j, n in enumerate(d['students']):
+        if is_male[n['first_name']]:
+            x += 1
+        else:
+            y += 1
+    else:
+        z = d['class']
+        print(f'Класс: {z} девочки {y}, мальчики {x}')
+
+
+
 
 
 # Задание 5
@@ -91,5 +113,20 @@ is_male = {
     'Олег': True,
     'Миша': True,
 }
-# ???
-
+L1 = []
+L2 = []
+for i, d in enumerate(school):
+    lst = []
+    for j, n in enumerate(d['students']):
+        if is_male[n['first_name']]:
+            lst.append(1)
+        else:
+            lst.append(0)
+    else:
+        L1.append(lst.count(1))
+        L2.append(lst.count(0))
+else:
+    a = school[L1.index(max(L1))]['class']
+    print(f'Больше всего мальчиков в классе {a}')
+    b = school[L2.index(max(L2))]['class']
+    print(f'Больше всего девочек в классе {b}')
